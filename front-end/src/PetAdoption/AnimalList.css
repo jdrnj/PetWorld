@@ -1,0 +1,28 @@
+.pet-list {
+  width: 100%;
+  display: flex;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.cards-item {
+  display: flex;
+  padding: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .cards-item {
+    width: 50%;
+  }
+}
+
+@media (min-width: 56rem) {
+  .cards-item {
+    width: 33.3333%;
+  }
+}
