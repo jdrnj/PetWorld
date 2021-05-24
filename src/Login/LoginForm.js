@@ -1,32 +1,46 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { UserContext } from "../context/UserContext";
 function LoginForm() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [Logged, setLogged] = useState(false);
-
+  const [logged, setLogged] = useState(false);
+  const [user, setUser] = useContext(UserContext);
+  const history = useHistory();
   const handleInput = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     console.log(formData);
     e.preventDefault();
 
     const obj = {
-      email: formData.email,
-      password: formData.password,
+      email: "dancho",
+      password: "asdasd",
     };
 
-    axios
-      .get(`http://localhost:3001/login/${formData.email}`)
+    await axios
+      .post("http://localhost:3001/login/user", formData)
       // .then((res) => console.log(res.data.msg));
-      .then((res) => setFormData(res.data.data.users));
+      .then((res) =>
+        res.data.status === "success" ? setLogged(true) : setLogged(false)
+      );
+
+    if (logged) {
+      setUser({
+        username: "",
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: "",
+      });
+      history.push("/user");
+    }
   };
 
   return (

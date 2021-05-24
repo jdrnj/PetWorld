@@ -40,7 +40,7 @@ function Login() {
     <div className="Login">
       {formData.email !== "" ? (
         <div className="welcome">
-          {/* <UProfileHeader name={user.name} Logout={Logout}/> */}
+          {/* <UProfileHeader name={user.name} Logout={Logout} /> */}
           <UserProfile />
         </div>
       ) : (
