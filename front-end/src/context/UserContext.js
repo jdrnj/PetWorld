@@ -7,7 +7,7 @@ export const UserProvider = (props) => {
     username: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    type: "",
   });
 
   return (

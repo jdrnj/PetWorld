@@ -1,0 +1,116 @@
+.pet-section {
+  flex-flow: column wrap;
+
+  display: flex;
+  flex-direction: row;
+  margin-top: 5rem;
+}
+.left {
+  flex-flow: column wrap;
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+}
+.right {
+  flex-flow: column wrap;
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.personal-info-specifications {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-left: 0.5rem;
+}
+.personal-info-data {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-right: 0.5rem;
+  margin-left: 1rem;
+}
+.image {
+  margin-left: 2rem;
+  display: flex;
+  width: 70%;
+  height: auto;
+}
+.personal-info {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.medical-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.pet-story {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+}
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 400px;
+  height: 300px;
+}
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  width: 80%;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(247, 241, 241, 0),
+    rgba(231, 218, 218, 0.75),
+    rgba(245, 240, 240, 0)
+  );
+}
+.medical-data-list {
+  display: flex;
+  width: 100%;
+  list-style: none;
+  flex-direction: column;
+}
+.medical-data-item:before {
+  color: rgb(15, 184, 15);
+  content: "\f00c"; /* FontAwesome Unicode */
+  font-family: FontAwesome;
+  display: inline-block;
+  margin-left: -1.3em; /* same as padding-left set on li */
+  width: 1.3em; /* same as padding-left set on li */
+}
+
+@media screen and (max-width: 48em) {
+  .pet-section {
+    flex-direction: column;
+  }
+  .left {
+    width: 100%;
+  }
+  .right {
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .image {
+    margin-left: 0;
+  }
+  .medical-data-list {
+    width: 40%;
+  }
+  .pet-story {
+    width: 60%;
+  }
+}

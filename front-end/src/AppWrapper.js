@@ -5,25 +5,31 @@ import Register from "./Register/Register";
 import Login from "./Login/Login";
 import Header from "./Components/header/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { UserProvider } from "./context/UserContext";
 import AnimalList from "./PetAdoption/AnimalList";
 import UserProfile from "./UserProfile/UserProfile";
-import Account from "./Components/Account/Account";
 import { UserContext } from "./context/UserContext";
+import Pet from "./PetAdoption/Pet/Pet";
 import UProfileHeader from "./UserProfile/UProfileHeader";
+import Admin from "./Admin/Admin";
 function AppWrapper() {
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   return (
     <Router>
       <div className="App">
-        {user.email !== "" ? <UProfileHeader /> : <Header />}
+        {user.email !== "" ? (
+          <UProfileHeader name={user.username} />
+        ) : (
+          <Header />
+        )}
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/user" component={UserProfile} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/:animal" component={AnimalList} />
-          <Route path="/account" component={Account} />
+          <Route path="/admin" component={Admin} />
+
+          <Route path="/:category/:animalId" component={Pet} />
+          <Route path="/:category" component={AnimalList} />
         </Switch>
       </div>
     </Router>

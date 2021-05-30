@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -10,6 +10,7 @@ function LoginForm() {
     password: "",
   });
   const [logged, setLogged] = useState(false);
+  //eslint-disable-next-line
   const [user, setUser] = useContext(UserContext);
   const history = useHistory();
   const handleInput = ({ target }) => {
@@ -17,34 +18,23 @@ function LoginForm() {
   };
 
   const handleSubmit = async (e) => {
-    console.log(formData);
     e.preventDefault();
-
-    const obj = {
-      email: "dancho",
-      password: "asdasd",
-    };
-
     await axios
       .post("http://localhost:3001/login/user", formData)
-      // .then((res) => console.log(res.data.msg));
-      .then((res) =>
-        res.data.status === "success" ? setLogged(true) : setLogged(false)
-      );
-
-    if (logged) {
-      setUser({
-        username: "",
-        email: formData.email,
-        password: formData.password,
-        confirmPassword: "",
+      .then((res) => {
+        setUser({
+          id: res.data?.data?.user?.u_id,
+          email: res.data?.data?.user?.email,
+          username: res.data?.data?.user?.username,
+          type: res.data?.data?.user?.account_type,
+        });
+        res.data.status === "success" ? setLogged(true) : setLogged(false);
       });
-      history.push("/user");
-    }
   };
 
   return (
     <div>
+      {logged ? history.push("/user") : null}
       <form onSubmit={handleSubmit}>
         {
           <div className="form-inner">
@@ -58,9 +48,6 @@ function LoginForm() {
                 type="text"
                 onChange={handleInput}
               />
-              {/* <label htmlFor="name">Name:</label>
-                    <input type="text" name="name" id="name" onChange={e => setDetails({...details, name: e.target.value})}
-                        value={details.name}/> */}
             </div>
             <div className="form-group">
               <TextField
@@ -71,22 +58,11 @@ function LoginForm() {
                 type="password"
                 onChange={handleInput}
               />
-              {/* <label htmlFor="email">Email:</label>
-                    <input type="email" name="email" id="email" onChange={e => setDetails({...details, email: e.target.value})}
-                        value={details.email}/> */}
             </div>
-            {/* <div className="form-group">
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})}
-                        value={details.password}/>
-                </div> */}
 
             <Button variant="contained" color="default" type="submit">
               Login
             </Button>
-            {/* <Link to='/user'>
-                <button onClick={submitHandler}>Login </button>
-                </Link> */}
           </div>
         }
       </form>

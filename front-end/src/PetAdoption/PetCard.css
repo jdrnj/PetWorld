@@ -3,7 +3,29 @@ img {
   max-width: 100%;
   vertical-align: middle;
 }
+.pet-image {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
 
+.pet-for-adoption-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  color: white;
+  border: 1px solid rgba(248, 248, 248, 0.8);
+  font-size: 16px;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 30px;
+  text-align: center;
+}
+.pet-for-adoption-button:hover {
+  background-color: rgba(251, 253, 251, 0.2);
+}
 .btn {
   color: #ffffff;
   padding: 0.8rem;

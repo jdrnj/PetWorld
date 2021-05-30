@@ -1,36 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import PetCard from "../PetAdoption/PetCard";
 
 function UserProfile() {
-  const petsHandler = (e) => {
-    e.preventDefault();
-  };
-
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/categories/get")
+      .then((res) => setCategories(res.data.data.categories));
+  }, []);
   return (
     <div className="user-profile">
-      <form onSubmit={petsHandler}>
-        <label htmlFor="" className="adopt-cat-label">
-          Adopt a cat
-        </label>
-        <img src="img/cat1.jpg" alt="cat" className="cat-img" />
-        <Link to="/cats">
-          <button className="cat-btn">View Available Cats</button>
-        </Link>
-        <label htmlFor="" className="adopt-dog-label">
-          Adopt a dog
-        </label>
-        <img src="img/dog1.jpg" alt="cat" className="cat-img" />
-        <Link to="/dogs">
-          <button className="dog-btn">View Available Dogs</button>
-        </Link>
-        <label htmlFor="" className="adopt-cat-label">
-          Adopt a rabbit
-        </label>
-        <img src="img/cat1.jpg" alt="cat" className="cat-img" />
-        <Link to="/rabbits">
-          <button className="cat-btn">View Available Rabbits</button>
-        </Link>
-      </form>
+      <div className="pets-user">
+        <ul className="pets-for-adoption">
+          {categories?.map((item) => (
+            <li key={item.id}>
+              <PetCard
+                name={item.name}
+                petForAdoption={true}
+                image={`http://localhost:3001/images/${item.image}`}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

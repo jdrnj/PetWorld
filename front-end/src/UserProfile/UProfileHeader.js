@@ -1,15 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "./UserProfile.css";
-
-function UProfileHeader({ name, Logout }) {
+import { UserContext } from "../context/UserContext";
+import { Button } from "@material-ui/core";
+function UProfileHeader() {
+  const [user, setUser] = useContext(UserContext);
+  let history = useHistory();
+  const logoutHandler = (evt) => {
+    evt.preventDefault();
+    setUser({
+      username: "",
+      email: "",
+      password: "",
+      type: "",
+    });
+    history.push("/");
+  };
   return (
     <header className="profile-header">
-      <h2 className="profile-header-title">Welcome, {name}</h2>
-      <Link to="/account">
+      <Link to="/">
+        <h2 className="profile-header-title">Welcome, {user.username}</h2>
+      </Link>
+      <Link to="/user">
         <button className="account-btn">Account</button>
       </Link>
-      <button className="logout-btn" onClick={Logout}>
+      {user.type === "admin" ? (
+        <Link to="/admin">
+          <Button variant="contained" color="secondary">
+            Admin
+          </Button>
+        </Link>
+      ) : null}
+
+      <button className="logout-btn" onClick={logoutHandler}>
         Logout
       </button>
     </header>
