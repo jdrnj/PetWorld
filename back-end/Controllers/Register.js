@@ -3,8 +3,8 @@ const db = require("../Database");
 exports.insert_register_post = async (req, res) => {
   try {
     await db.query(
-      "INSERT INTO users (username,email,password) values ($1,$2,$3)",
-      [req.body.username, req.body.email, req.body.password]
+      "INSERT INTO users (username,email,password, account_type) values ($1,$2,$3, $4)",
+      [req.body.username, req.body.email, req.body.password, req.body.type]
     );
     res.status(201).json({
       status: "success",
@@ -12,7 +12,6 @@ exports.insert_register_post = async (req, res) => {
         msg: "Successfully registered user!",
       },
     });
-    console.log(res);
   } catch (error) {
     res.status(201).json({
       status: "error",

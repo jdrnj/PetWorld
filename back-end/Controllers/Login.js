@@ -10,7 +10,7 @@ exports.login_user_post = async (req, res) => {
       res.status(201).json({
         status: "success",
         data: {
-          users: result.rows[0],
+          user: result.rows[0],
         },
       });
     } else {
@@ -22,6 +22,11 @@ exports.login_user_post = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    res.status(201).json({
+      status: "error",
+      data: {
+        msg: "There is no such user",
+      },
+    });
   }
 };
