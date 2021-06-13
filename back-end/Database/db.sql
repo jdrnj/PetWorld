@@ -21,7 +21,8 @@ CREATE TABLE adopter(
     conditions VARCHAR(100) NOT NULL,
     other_pets VARCHAR(50) NOT NULL,
     live VARCHAR(50) NOT NULL,
-    pet_id INT REFERENCES animal(animal_id) NOT NULL
+    pet_id INT REFERENCES animal(animal_id) NOT NULL,
+    created_at DATE NOT NULL
 );
 CREATE TABLE animal(
     animal_id SERIAL PRIMARY KEY NOT NULL,
@@ -35,5 +36,6 @@ CREATE TABLE animal(
     animal_weight NUMERIC,
     story VARCHAR(300),
     medical_info VARCHAR(200),
-    image VARCHAR(100) NOT NULL
+    image VARCHAR(100) NOT NULL,
+    isAdopted BOOLEAN
 );

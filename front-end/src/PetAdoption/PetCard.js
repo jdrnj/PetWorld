@@ -12,6 +12,7 @@ function PetCard({
   isForPreview,
   showImg,
   image,
+  isAdopted,
 }) {
   return petForAdoption ? (
     isForPreview ? (
@@ -41,7 +42,8 @@ function PetCard({
         <p className="pet-details">{breed}</p>
         <p className="pet-details">{age}</p>
         <p className="pet-details">{sex}</p>
-        <button className="btn card_btn">Read More</button>
+        <button
+          className="btn card_btn">Read More</button>
       </div>
     </div>
   ) : (
@@ -55,7 +57,10 @@ function PetCard({
         <p className="pet-details">{age}</p>
         <p className="pet-details">{sex}</p>
         <Link to={`/${category}/${id}`}>
-          <button className="btn card_btn">Read More</button>
+
+          <button
+            disabled={isAdopted}
+            className="btn card_btn"> {isAdopted ? "Adopted!" : "Read More"}</button>
         </Link>
       </div>
     </div>

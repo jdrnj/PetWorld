@@ -130,7 +130,7 @@ function Admin() {
           "Content-Type": "multipart/form-data",
         },
       });
-    } catch (err) {}
+    } catch (err) { }
   };
 
   const handleFileInput = ({ target }, src) => {
@@ -425,25 +425,25 @@ function Admin() {
         <ul>
           {adopters?.length > 0
             ? adopters.map((adopter) => (
-                <li key={adopter.adopterId}>
-                  <Adopter
-                    petId={adopter.petId}
-                    username={adopter.username}
-                    email={adopter.email}
-                    experience={adopter.experience}
-                    conditions={adopter.conditions}
-                    otherPets={adopter.otherPets}
-                    live={adopter.live}
-                  />
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => confirmAdoption(adopter.adopterId)}
-                  >
-                    Confirm adoption
-                  </Button>
-                </li>
-              ))
+              <li key={adopter.adopterId}>
+                <Adopter
+                  petId={adopter.petId}
+                  username={adopter.username}
+                  email={adopter.email}
+                  experience={adopter.experience}
+                  conditions={adopter.conditions}
+                  otherPets={adopter.otherPets}
+                  live={adopter.live}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => confirmAdoption(adopter.adopterId)}
+                >
+                  Confirm adoption
+                </Button>
+              </li>
+            ))
             : null}
         </ul>
       </div>

@@ -4,7 +4,7 @@ exports.insert_adopter_post = async (req, res) => {
   req.body.user.id;
   try {
     await db.query(
-      "INSERT INTO adopter (user_id, experience, conditions, other_pets, live, pet_id) values ($1,$2,$3,$4,$5, $6)",
+      "INSERT INTO adopter (user_id, experience, conditions, other_pets, live, pet_id, created_at) values ($1,$2,$3,$4,$5, $6, $7)",
       [
         req.body.user.id,
         req.body.adoptionForm.experience,
@@ -12,8 +12,10 @@ exports.insert_adopter_post = async (req, res) => {
         req.body.adoptionForm.otherPets,
         req.body.adoptionForm.live,
         req.body.animalId,
+        req.body.createdAt
       ]
     );
+    await db.query("UPDATE animal SET isAdopted= $1 WHERE animal_id=$2", [true, req.body.animalId])
     res.status(201).json({
       status: "success",
       data: {

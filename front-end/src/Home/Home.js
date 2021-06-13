@@ -4,6 +4,7 @@ import "./Home.css";
 import AnimalList from "../PetAdoption/AnimalList";
 import { FaFilter } from "react-icons/fa";
 import Select, { components } from "react-select";
+import moment from 'moment'
 import axios from "axios";
 const scrollToRef = (ref) => {
   window.scrollTo({ top: ref.current.offsetTop, left: 0, behavior: "smooth" });
@@ -25,14 +26,15 @@ function Home() {
   });
   useEffect(() => {
     axios
-      .get("http://localhost:3001/pet/get/all")
+      .get(`http://localhost:3001/pet/get/all/${moment().subtract(5, 'days').format('L')}`)
       .then((res) => setAnimals(res.data.data.animals));
   }, []);
   useEffect(() => {
     axios
-      .get("http://localhost:3001/pet/get/by/filter", {
+      .get(`http://localhost:3001/pet/get/by/filter`, {
         params: {
           filter: filter,
+          date: moment().subtract(5, 'days').format('L')
         },
       })
       .then((res) => setAnimals(res.data.data.animals));

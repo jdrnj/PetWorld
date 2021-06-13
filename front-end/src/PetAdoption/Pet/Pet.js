@@ -6,6 +6,7 @@ import { Button, TextField } from "@material-ui/core";
 import axios from "axios";
 import { UserContext } from "../../context/UserContext";
 import Modal from "react-modal";
+import moment from "moment";
 const customStyles = {
   content: {
     top: "50%",
@@ -44,6 +45,7 @@ const Pet = ({ match }) => {
       user: user,
       adoptionForm: adoptionForm,
       animalId: animal.animal_id,
+      createdAt: moment().format('L')
     });
     setOpenModal(false);
   };
@@ -143,6 +145,7 @@ const Pet = ({ match }) => {
       <div className="right">
         {user.username !== "" ? (
           <Button
+            disabled={animal.isAdopted}
             variant="contained"
             color="primary"
             style={{
